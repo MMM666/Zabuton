@@ -1,4 +1,4 @@
-package net.minecraft.src;
+ï»¿package net.minecraft.src;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -78,8 +78,8 @@ public class mod_VZN_zabuton extends BaseMod {
 		isForge = ModLoader.isModLoaded("Forge");
 		isMMMLib = ModLoader.isModLoaded("mod_MMM_MMMLib");
 		try {
-			// ƒNƒ‰ƒCƒAƒ“ƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğŠl“¾
-			// ForgeŠÂ‹«‰º‚ÅƒTƒo[‘¤‚ªÀs‚·‚é‚ÆƒGƒ‰[‚ğ•Ô‚·B
+			// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç²å¾—
+			// Forgeç’°å¢ƒä¸‹ã§ã‚µãƒãƒ¼å´ãŒå®Ÿè¡Œã™ã‚‹ã¨ã‚¨ãƒ©ãƒ¼ã‚’è¿”ã™ã€‚
 			mc = ModLoader.getMinecraftInstance();
 		} catch (Exception e) {
 		} catch (Error e) {
@@ -114,7 +114,7 @@ public class mod_VZN_zabuton extends BaseMod {
 			ModLoader.addLocalization(
 					(new StringBuilder()).append(zabuton.getItemName()).append(".").append(ItemDye.dyeColorNames[15 - i]).append(".name").toString(),
 					"ja_JP",
-					(new StringBuilder()).append("À•z’c ").append(VZN_ItemZabuton.colorNamesJP[15 - i]).toString()
+					(new StringBuilder()).append("åº§å¸ƒå›£ ").append(VZN_ItemZabuton.colorNamesJP[15 - i]).toString()
 				);
 			if (isAlternativeRecipe) {
 				ModLoader.addRecipe(new ItemStack(zabuton, 1, 15 - i), new Object[] {
@@ -151,13 +151,13 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public void addRenderer(Map map) {
-		// Render‚ğ’Ç‰Á
+		// Renderã‚’è¿½åŠ 
 		map.put(VZN_EntityZabuton.class, new VZN_RenderZabuton());
 	}
 
 	@Override
 	public Entity spawnEntity(int entityId, World world, double scaledX, double scaledY, double scaledZ) {
-		// Modloader‰º‚Å‚Í“Æ©‚É¶¬‚·‚é‚Ì‚Å—v‚ç‚È‚¢B
+		// Modloaderä¸‹ã§ã¯ç‹¬è‡ªã«ç”Ÿæˆã™ã‚‹ã®ã§è¦ã‚‰ãªã„ã€‚
 		if (!isForge) return null;
 		
 		try {
@@ -177,7 +177,7 @@ public class mod_VZN_zabuton extends BaseMod {
 	//Modloader
 //    @Override
 	public Packet23VehicleSpawn getSpawnPacket(Entity var1, int var2) {
-		// –Ê“|‚È‚Ì‚Å“Æ©ƒpƒPƒbƒg
+		// é¢å€’ãªã®ã§ç‹¬è‡ªãƒ‘ã‚±ãƒƒãƒˆ
 		return new VZN_PacketZabtonSpawn((VZN_EntityZabuton)var1);
 	}
 

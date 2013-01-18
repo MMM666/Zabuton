@@ -1,4 +1,4 @@
-package net.minecraft.src;
+ï»¿package net.minecraft.src;
 
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +54,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 
 	@Override
 	public void setThrowableHeading(double px, double py, double pz, float f, float f1) {
-		// ƒfƒBƒXƒyƒ“ƒT[—p
+		// ãƒ‡ã‚£ã‚¹ãƒšãƒ³ã‚µãƒ¼ç”¨
 		float f2 = MathHelper.sqrt_double(px * px + py * py + pz * pz);
 		px /= f2;
 		py /= f2;
@@ -126,7 +126,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 				riddenByEntity instanceof EntityEnderman) {
 			return (double)height * 0.0D - 0.4D;
 		}
-		// “Áê‹@‘Î‰
+		// ç‰¹æ®Šæ©Ÿå¯¾å¿œ
 		if (riddenByEntity.getClass().getSimpleName().compareTo("Melo_e") == 0) {
 			return (double)height * 0.0D - 0.4D;
 		}
@@ -141,7 +141,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 
 	@Override
 	public boolean handleWaterMovement() {
-		// “Æ©‚Ì…–v”»’è
+		// ç‹¬è‡ªã®æ°´æ²¡åˆ¤å®š
 		int var4 = MathHelper.floor_double(boundingBox.minX);
 		int var5 = MathHelper.floor_double(boundingBox.maxX + 1.0D);
 		int var6 = MathHelper.floor_double(boundingBox.minY);
@@ -242,9 +242,9 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 		
-		// ƒ{[ƒg‚Ì”»’è‚ÌƒRƒs[
-		// ƒ{[ƒg‚Í’¼ÚƒT[ƒo[‚ÆˆÊ’uî•ñ‚ğ“¯Šú‚³‚¹‚Ä‚¢‚é‚í‚¯‚Å‚Í‚È‚­A—\‘ªˆÊ’uŒvZŒn‚É’l‚ğ“n‚µ‚Ä‚¢‚éB
-		// ˆö‚İ‚Éƒ{[ƒg‚ÌÀ•W“¯ŠúŠÔŠu‚ÍŒ‹\’·‚ß‚È‚Ì‚Å“®‚«‚ª•ÏB
+		// ãƒœãƒ¼ãƒˆã®åˆ¤å®šã®ã‚³ãƒ”ãƒ¼
+		// ãƒœãƒ¼ãƒˆã¯ç›´æ¥ã‚µãƒ¼ãƒãƒ¼ã¨ä½ç½®æƒ…å ±ã‚’åŒæœŸã•ã›ã¦ã„ã‚‹ã‚ã‘ã§ã¯ãªãã€äºˆæ¸¬ä½ç½®è¨ˆç®—ç³»ã«å€¤ã‚’æ¸¡ã—ã¦ã„ã‚‹ã€‚
+		// å› ã¿ã«ãƒœãƒ¼ãƒˆã®åº§æ¨™åŒæœŸé–“éš”ã¯çµæ§‹é•·ã‚ãªã®ã§å‹•ããŒå¤‰ã€‚
 		
 		
 		double var6;
@@ -285,10 +285,10 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 				this.motionZ *= 0.9900000095367432D;
 			}
 			
-			// TODO:“Áêˆ—
+			// TODO:ç‰¹æ®Šå‡¦ç†
 			if (this.riddenByEntity instanceof EntityLiving) { 
 				EntityLiving lel = (EntityLiving)riddenByEntity;
-				// À‚Á‚Ä‚éŠÔ‚ÍÁ–Å‚³‚¹‚È‚¢
+				// åº§ã£ã¦ã‚‹é–“ã¯æ¶ˆæ»…ã•ã›ãªã„
 				lel.entityAge = 0;
 			}
 			
@@ -296,17 +296,17 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 		else
 		{
 			// Server
-			// —‰º
+			// è½ä¸‹
 			motionY -= 0.08D;
 			
-			// “‹æÒ‚É‚æ‚éƒxƒNƒgƒ‹‘€ì
+			// æ­ä¹—è€…ã«ã‚ˆã‚‹ãƒ™ã‚¯ãƒˆãƒ«æ“ä½œ
 			if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer)
 			{
 				this.motionX += this.riddenByEntity.motionX * 0.2D;
 				this.motionZ += this.riddenByEntity.motionZ * 0.2D;
 			}
 			
-			// Å‚‘¬“x”»’è
+			// æœ€é«˜é€Ÿåº¦åˆ¤å®š
 			Double lmaxspeed = isDispensed() ? 10.0D : 0.35D;
 			var6 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			if (var6 > lmaxspeed)
@@ -324,7 +324,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 				this.motionY *= 0.5D;
 				this.motionZ *= 0.5D;
 				setDispensed(false);
-				// setVelocity‚ÌŒÄ‚Î‚ê‚é‰ñ”‚ª­‚È‚­‚Ä•Ï‚È“®‚«‚ğ‚·‚é‚Ì‚Å‘Îô
+				// setVelocityã®å‘¼ã°ã‚Œã‚‹å›æ•°ãŒå°‘ãªãã¦å¤‰ãªå‹•ãã‚’ã™ã‚‹ã®ã§å¯¾ç­–
 //                this.velocityChanged = true;
 			}
 			
@@ -334,7 +334,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 			this.motionY *= 0.949999988079071D;
 			this.motionZ *= 0.9900000095367432D;
 			
-			// ƒwƒbƒfƒBƒ“ƒO
+			// ãƒ˜ãƒƒãƒ‡ã‚£ãƒ³ã‚°
 			this.rotationPitch = 0.0F;
 			var8 = (double)this.rotationYaw;
 			var26 = this.prevPosX - this.posX;
@@ -362,7 +362,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 			
 //            if (!this.worldObj.isRemote)
 			{
-				// “–‚½‚è”»’è
+				// å½“ãŸã‚Šåˆ¤å®š
 				List var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.17D, 0.0D, 0.17D));
 				
 				if (var16 != null && !var16.isEmpty())
@@ -384,16 +384,16 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 		}
 		if (this.riddenByEntity != null) {
 			if (this.riddenByEntity instanceof EntityLiving) { 
-				// À‚Á‚Ä‚éŠÔ‚ÍÁ–Å‚³‚¹‚È‚¢
+				// åº§ã£ã¦ã‚‹é–“ã¯æ¶ˆæ»…ã•ã›ãªã„
 				((EntityLiving)riddenByEntity).entityAge = 0;
 			}
 			if (riddenByEntity.isDead) {
-				// ’…À‘ÎÛ‚ª€‚ñ‚¾‚ç–³l‰»
+				// ç€åº§å¯¾è±¡ãŒæ­»ã‚“ã ã‚‰ç„¡äººåŒ–
 				riddenByEntity = null;
 				setRiddenByEntityID(riddenByEntity);
 			} 
 			else if (inWater) {
-				// ‚Ê‚ê‚½À•z’c‚Í‚Ğ‚á‚Ÿ‚Á‚Ä‚È‚é
+				// ã¬ã‚ŒãŸåº§å¸ƒå›£ã¯ã²ã‚ƒãã£ã¦ãªã‚‹
 				riddenByEntity.mountEntity(null);
 				setRiddenByEntityID(riddenByEntity);
 			}
@@ -402,7 +402,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 
 	@Override
     public void applyEntityCollision(Entity entity) {
-		// ‹z’…”»’è
+		// å¸ç€åˆ¤å®š
     	if (worldObj.isRemote) {
             return;
         }
@@ -418,7 +418,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
     
 	@Override
     public boolean interact(EntityPlayer entityplayer) {
-		// ƒ‰[ƒCƒhEƒIƒ“I
+		// ãƒ©ãƒ¼ã‚¤ãƒ‰ãƒ»ã‚ªãƒ³ï¼
         if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
             return true;
         }
@@ -432,7 +432,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
         return true;
     }
 
-	// Ëo”»’è
+	// å°„å‡ºåˆ¤å®š
 	public boolean isDispensed() {
 		return dataWatcher.getWatchableObjectByte(17) > 0x00;
 	}
@@ -441,7 +441,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 		dataWatcher.updateObject(17, (byte)(isDispensed ? 0x01 : 0x00));
 	}
 	
-	// ƒNƒ‰ƒCƒAƒ“ƒg‘¤•â³—p
+	// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå´è£œæ­£ç”¨
 	public int getRiddenByEntityID() {
 		int li = dataWatcher.getWatchableObjectInt(18);
 		return li;
