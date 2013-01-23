@@ -1,4 +1,4 @@
-ï»¿package net.minecraft.src;
+package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
@@ -13,15 +13,15 @@ public class VZN_RenderZabuton extends Render {
 	}
 
 	public void doRenderZabuton(VZN_EntityZabuton entityzabuton, double d, double d1, double d2, float f, float f1) {
-		// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°å®Ÿè£…
-		// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+		// ƒŒƒ“ƒ_ƒŠƒ“ƒOŽÀ‘•
+		// ƒŒƒ“ƒ_ƒŠƒ“ƒO
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float)d, (float)d1, (float)d2);
 		GL11.glRotatef(180F - f, 0.0F, 1.0F, 0.0F);
 		
 		String s = entityzabuton.getTexture();
 		if (s.isEmpty()) {
-			// è‰²ã‚’ã¤ã‘ã‚‹
+			// F‚ð‚Â‚¯‚é
 			int k = ((VZN_ItemZabuton)mod_VZN_zabuton.zabuton).getColorFromDamage(entityzabuton.color, 0);
 			float f15 = (float)(k >> 16 & 0xff) / 255F;
 			float f17 = (float)(k >> 8 & 0xff) / 255F;

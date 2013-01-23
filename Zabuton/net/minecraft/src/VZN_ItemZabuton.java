@@ -1,4 +1,4 @@
-ï»¿package net.minecraft.src;
+package net.minecraft.src;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -7,8 +7,8 @@ import java.util.List;
 public class VZN_ItemZabuton extends Item {
 	
     public static final String colorNamesJP[] = {
-        "é»’", "èµ¤", "ç·‘", "èŒ¶", "é’", "ç´«", "ç©º", "éŠ€", "ç°", "æ’«å­", 
-        "é¶¸", "é»„", "æ·¡é’", "ç´…ç´«", "æ©™", "ç™½"
+        "•", "Ô", "—Î", "’ƒ", "Â", "‡", "‹ó", "‹â", "ŠD", "•q", 
+        "êS", "‰©", "’WÂ", "g‡", "ò", "”’"
     };
 /*
     public static final String colorNames[] = {
@@ -69,7 +69,7 @@ public class VZN_ItemZabuton extends Item {
                         Constructor<VZN_EntityZabuton> lconstructor = mod_VZN_zabuton.classZabuton.getConstructor(World.class, double.class, double.class, double.class, byte.class);
                         VZN_EntityZabuton ez = lconstructor.newInstance(world, (float)i + 0.5F, (float)j + 1.0F, (float)k + 0.5F, (byte)(itemstack.getItemDamage() & 0x0f));
                     	
-                        // æ–¹å‘ãã‚ã¯ã“ã“ã«å…¥ã‚Œã‚‹
+                        // •ûŒü‚¬‚ß‚Í‚±‚±‚É“ü‚ê‚é
                         ez.rotationYaw = (MathHelper.floor_double((double)((entityplayer.rotationYaw * 4F) / 360F) + 2.50D) & 3) * 90;
                         world.spawnEntityInWorld(ez);
                     } catch (Exception e) {
