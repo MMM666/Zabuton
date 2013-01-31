@@ -149,30 +149,25 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 		int var8 = MathHelper.floor_double(boundingBox.minZ);
 		int var9 = MathHelper.floor_double(boundingBox.maxZ + 1.0D);
 		
-		if (!worldObj.checkChunksExist(var4, var6, var8, var5, var7, var9))
-		{
+		if (!worldObj.checkChunksExist(var4, var6, var8, var5, var7, var9)) {
 			return false;
-		}
-		else
-		{
+		} else {
 			boolean var10 = false;
 			
-			for (int var12 = var4; var12 < var5; ++var12)
-			{
-				for (int var13 = var6; var13 < var7; ++var13)
-				{
-					for (int var14 = var8; var14 < var9; ++var14)
-					{
+			for (int var12 = var4; var12 < var5; ++var12) {
+				for (int var13 = var6; var13 < var7; ++var13) {
+					for (int var14 = var8; var14 < var9; ++var14) {
 						Block var15 = Block.blocksList[worldObj.getBlockId(var12, var13, var14)];
 						
-						if (var15 != null && var15.blockMaterial == Material.water)
-						{
+						if (var15 != null && var15.blockMaterial == Material.water) {
+							inWater = true;
 							double var16 = (double)((float)(var13 + 1) - BlockFluid.getFluidHeightPercent(worldObj.getBlockMetadata(var12, var13, var14)));
 							
-							if ((double)var7 >= var16)
-							{
+							if ((double)var7 >= var16) {
 								var10 = true;
 							}
+						} else {
+							inWater = false;
 						}
 					}
 				}
@@ -255,8 +250,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 		
 		if (this.worldObj.isRemote) {
 			// Client
-			if (this.boatPosRotationIncrements > 0)
-			{
+			if (this.boatPosRotationIncrements > 0) {
 				var6 = this.posX + (this.zabutonX - this.posX) / (double)this.boatPosRotationIncrements;
 				var8 = this.posY + (this.zabutonY - this.posY) / (double)this.boatPosRotationIncrements;
 				var26 = this.posZ + (this.zabutonZ - this.posZ) / (double)this.boatPosRotationIncrements;
@@ -266,17 +260,13 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 				--this.boatPosRotationIncrements;
 				this.setPosition(var6, var8, var26);
 				this.setRotation(this.rotationYaw, this.rotationPitch);
-			}
-			else
-			{
+			} else {
 				motionY -= 0.08D;
-				if (this.onGround)
-				{
+				if (this.onGround) {
 					this.motionX *= 0.5D;
 					this.motionY *= 0.5D;
 					this.motionZ *= 0.5D;
 					setDispensed(false);
-					
 				}
 				this.moveEntity(this.motionX, this.motionY, this.motionZ);
 				
@@ -286,22 +276,18 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 			}
 			
 			// TODO:特殊処理
-			if (this.riddenByEntity instanceof EntityLiving) { 
+			if (this.riddenByEntity instanceof EntityLiving) {
 				EntityLiving lel = (EntityLiving)riddenByEntity;
 				// 座ってる間は消滅させない
 				lel.entityAge = 0;
 			}
-			
-		}
-		else
-		{
+		} else {
 			// Server
 			// 落下
 			motionY -= 0.08D;
 			
 			// 搭乗者によるベクトル操作
-			if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer)
-			{
+			if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer) {
 				this.motionX += this.riddenByEntity.motionX * 0.2D;
 				this.motionZ += this.riddenByEntity.motionZ * 0.2D;
 			}
@@ -309,17 +295,13 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 			// 最高速度判定
 			Double lmaxspeed = isDispensed() ? 10.0D : 0.35D;
 			var6 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-			if (var6 > lmaxspeed)
-			{
+			if (var6 > lmaxspeed) {
 				var8 = lmaxspeed / var6;
 				this.motionX *= var8;
 				this.motionZ *= var8;
 				var6 = lmaxspeed;
 			}
-			
-			
-			if (this.onGround)
-			{
+			if (this.onGround) {
 				this.motionX *= 0.5D;
 				this.motionY *= 0.5D;
 				this.motionZ *= 0.5D;
@@ -327,7 +309,6 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 				// setVelocityの呼ばれる回数が少なくて変な動きをするので対策
 //                this.velocityChanged = true;
 			}
-			
 			this.moveEntity(this.motionX, this.motionY, this.motionZ);
 			
 			this.motionX *= 0.9900000095367432D;
@@ -340,46 +321,37 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 			var26 = this.prevPosX - this.posX;
 			var12 = this.prevPosZ - this.posZ;
 			
-			if (var26 * var26 + var12 * var12 > 0.001D)
-			{
+			if (var26 * var26 + var12 * var12 > 0.001D) {
 				var8 = (double)((float)(Math.atan2(var12, var26) * 180.0D / Math.PI));
 			}
 			
 			double var14 = MathHelper.wrapAngleTo180_double(var8 - (double)this.rotationYaw);
-			
-			if (var14 > 20.0D)
-			{
+			if (var14 > 20.0D) {
 				var14 = 20.0D;
 			}
-			
-			if (var14 < -20.0D)
-			{
+			if (var14 < -20.0D) {
 				var14 = -20.0D;
 			}
 			
 			this.rotationYaw = (float)((double)this.rotationYaw + var14);
 			this.setRotation(this.rotationYaw, this.rotationPitch);
 			
-//            if (!this.worldObj.isRemote)
+//			if (!this.worldObj.isRemote)
 			{
 				// 当たり判定
 				List var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.17D, 0.0D, 0.17D));
 				
-				if (var16 != null && !var16.isEmpty())
-				{
+				if (var16 != null && !var16.isEmpty()) {
 					Iterator var28 = var16.iterator();
 					
-					while (var28.hasNext())
-					{
+					while (var28.hasNext()) {
 						Entity var18 = (Entity)var28.next();
 						
-						if (var18 != this.riddenByEntity && var18.canBePushed() && var18 instanceof VZN_EntityZabuton)
-						{
+						if (var18 != this.riddenByEntity && var18.canBePushed() && var18 instanceof VZN_EntityZabuton) {
 							var18.applyEntityCollision(this);
 						}
 					}
 				}
-				
 			}
 		}
 		if (this.riddenByEntity != null) {
@@ -391,7 +363,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 				// 着座対象が死んだら無人化
 				riddenByEntity = null;
 				setRiddenByEntityID(riddenByEntity);
-			} 
+			}
 			else if (inWater) {
 				// ぬれた座布団はひゃぁってなる
 				riddenByEntity.mountEntity(null);
@@ -401,56 +373,52 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 	}
 
 	@Override
-    public void applyEntityCollision(Entity entity) {
+	public void applyEntityCollision(Entity entity) {
 		// 吸着判定
-    	if (worldObj.isRemote) {
-            return;
-        }
-        if (entity == riddenByEntity) {
-            return;
-        }
-        if ((entity instanceof EntityLiving) && !(entity instanceof EntityPlayer) && riddenByEntity == null && entity.ridingEntity == null) {
-        	entity.mountEntity(this);
-        	setRiddenByEntityID(riddenByEntity);
-        }
-        super.applyEntityCollision(entity);
-    }
-    
+		if (worldObj.isRemote) {
+			return;
+		}
+		if (entity == riddenByEntity) {
+			return;
+		}
+		if ((entity instanceof EntityLiving) && !(entity instanceof EntityPlayer) && riddenByEntity == null && entity.ridingEntity == null) {
+			entity.mountEntity(this);
+			setRiddenByEntityID(riddenByEntity);
+		}
+		super.applyEntityCollision(entity);
+	}
+
 	@Override
-    public boolean interact(EntityPlayer entityplayer) {
+	public boolean interact(EntityPlayer entityplayer) {
 		// ラーイド・オン！
-        if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-            return true;
-        }
-        if (!worldObj.isRemote) {
-//        	if (riddenByEntity != null && !(riddenByEntity instanceof EntityPlayer)) {
-//            	riddenByEntity.mountEntity(null);
-//        	}
-            entityplayer.mountEntity(this);
-//            setRiddenByEntityID(riddenByEntity);
-        }
-        return true;
-    }
+		if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
+			return true;
+		}
+		if (!worldObj.isRemote) {
+			entityplayer.mountEntity(this);
+		}
+		return true;
+	}
 
 	// 射出判定
 	public boolean isDispensed() {
 		return dataWatcher.getWatchableObjectByte(17) > 0x00;
 	}
-	
+
 	public void setDispensed(boolean isDispensed) {
 		dataWatcher.updateObject(17, (byte)(isDispensed ? 0x01 : 0x00));
 	}
-	
+
 	// クライアント側補正用
 	public int getRiddenByEntityID() {
 		int li = dataWatcher.getWatchableObjectInt(18);
 		return li;
 	}
-	
+
 	public Entity getRiddenByEntity() {
 		return ((WorldClient)worldObj).getEntityByID(getRiddenByEntityID());
 	}
-	
+
 	public void setRiddenByEntityID(Entity pentity) {
 		dataWatcher.updateObject(18, Integer.valueOf(pentity == null ? 0 : pentity.entityId));
 	}
