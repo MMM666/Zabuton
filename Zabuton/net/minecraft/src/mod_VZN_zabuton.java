@@ -50,8 +50,6 @@ public class mod_VZN_zabuton extends BaseMod {
 	private static int iconIndex;
 	public static Item zabuton;
 	public static int uniqueID;
-	public static boolean isForge;
-	public static boolean isMMMLib;
 	public static String textureNames[] = {
 		"", "", "", "",
 		"", "", "", "",
@@ -59,13 +57,12 @@ public class mod_VZN_zabuton extends BaseMod {
 		"", "", "", ""
 	};
 	public static Class classZabuton;
-	public static Minecraft mc = null;
 
 
 
 	@Override
 	public String getVersion() {
-		return "1.4.7-2";
+		return "1.4.7-3";
 	}
 
 	@Override
@@ -74,37 +71,19 @@ public class mod_VZN_zabuton extends BaseMod {
 	}
 
 	@Override
+	public String getPriorities() {
+		return "required-after:mod_MMM_MMMLib";
+	}
+
+	@Override
 	public void load() {
-		isForge = ModLoader.isModLoaded("Forge");
-		isMMMLib = ModLoader.isModLoaded("mod_MMM_MMMLib");
-		try {
-			// クライアントのインスタンスを獲得
-			// Forge環境下でサバー側が実行するとエラーを返す。
-			mc = ModLoader.getMinecraftInstance();
-		} catch (Exception e) {
-		} catch (Error e) {
-		}
-		
-		iconIndex = (isForge && isMMMLib) ? 1 : ModLoader.addOverride("/gui/items.png", "/icon/zabuton_chip.png");
+		iconIndex = MMM_Helper.isForge ? 1 : ModLoader.addOverride("/gui/items.png", "/icon/zabuton_chip.png");
 		zabuton = new VZN_ItemZabuton(ItemID - 256).setIconIndex(iconIndex).setItemName("Zabuton");
+		MMM_Helper.setForgeIcon(zabuton);
 		uniqueID = ModLoader.getUniqueEntityId();
-		Package lpackage = this.getClass().getPackage();
-		String lcname = isForge ? "VZN_EntityZabuton_Forge" : "VZN_EntityZabuton";
-		if (lpackage != null) {
-			lcname = lpackage.getName() + "." + lcname;
-		}
-		try {
-			classZabuton = Class.forName(lcname);
-			ModLoader.registerEntityID(classZabuton, "Zabuton", uniqueID);
-			ModLoader.addEntityTracker(this, classZabuton, uniqueID, 80, 3, true);
-		} catch (Exception e) {
-		}
-		if (isForge && isMMMLib) {
-			try {
-				VZN_ItemZabuton.class.getMethod("setTextureFile", String.class).invoke(zabuton, "/gui/mmmforge.png");
-			} catch (Exception e) {
-			}
-		}
+		classZabuton = MMM_Helper.getEntityClass(this, "VZN_EntityZabuton");
+		ModLoader.registerEntityID(classZabuton, "Zabuton", uniqueID);
+		ModLoader.addEntityTracker(this, classZabuton, uniqueID, 80, 3, true);
 		
 		for (int i = 0; i < 16; i++) {
 			ModLoader.addLocalization(
@@ -157,8 +136,8 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public Entity spawnEntity(int entityId, World world, double scaledX, double scaledY, double scaledZ) {
-		// Modloader下では独自に生成するので要らない。
-		if (!isForge) return null;
+		// Forge
+		if (!MMM_Helper.isForge) return null;
 		
 		try {
 			Constructor<VZN_EntityZabuton> lconstructor = classZabuton.getConstructor(World.class);
@@ -173,10 +152,9 @@ public class mod_VZN_zabuton extends BaseMod {
 		return null;
 	}
 
-
-	//Modloader
-//    @Override
+	@Override
 	public Packet23VehicleSpawn getSpawnPacket(Entity var1, int var2) {
+		//Modloader
 		// 面倒なので独自パケット
 		return new VZN_PacketZabtonSpawn((VZN_EntityZabuton)var1);
 	}
