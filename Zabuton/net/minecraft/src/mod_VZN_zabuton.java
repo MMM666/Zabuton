@@ -46,10 +46,10 @@ public class mod_VZN_zabuton extends BaseMod {
 	public static String texture_f = "";
 	@MLProp(info="true is enable alternativ recipe.")
 	public static boolean isAlternativeRecipe = false;
+	@MLProp(info="EntityID. 0 is auto assign.")
+	public static int uniqueEntityID = 222;
 	
-	private static int iconIndex;
 	public static Item zabuton;
-	public static int uniqueID;
 	public static String textureNames[] = {
 		"", "", "", "",
 		"", "", "", "",
@@ -62,7 +62,7 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.7-3";
+		return "1.5.0-1";
 	}
 
 	@Override
@@ -77,21 +77,19 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public void load() {
-		iconIndex = MMM_Helper.isForge ? 1 : ModLoader.addOverride("/gui/items.png", "/icon/zabuton_chip.png");
-		zabuton = new VZN_ItemZabuton(ItemID - 256).setIconIndex(iconIndex).setItemName("Zabuton");
-		MMM_Helper.setForgeIcon(zabuton);
-		uniqueID = ModLoader.getUniqueEntityId();
-		classZabuton = MMM_Helper.getEntityClass(this, "VZN_EntityZabuton");
-		ModLoader.registerEntityID(classZabuton, "Zabuton", uniqueID);
-		ModLoader.addEntityTracker(this, classZabuton, uniqueID, 80, 3, true);
+		zabuton = new VZN_ItemZabuton(ItemID - 256).setUnlocalizedName("zabuton");
+		uniqueEntityID = uniqueEntityID == 0 ? MMM_Helper.getNextEntityID() : uniqueEntityID;
+		classZabuton = MMM_Helper.getForgeClass(this, "VZN_EntityZabuton");
+		ModLoader.registerEntityID(classZabuton, "Zabuton", uniqueEntityID);
+		ModLoader.addEntityTracker(this, classZabuton, uniqueEntityID, 80, 3, true);
 		
 		for (int i = 0; i < 16; i++) {
 			ModLoader.addLocalization(
-					(new StringBuilder()).append(zabuton.getItemName()).append(".").append(ItemDye.dyeColorNames[15 - i]).append(".name").toString(),
+					(new StringBuilder()).append(zabuton.getUnlocalizedName()).append(".").append(ItemDye.dyeColorNames[15 - i]).append(".name").toString(),
 					(new StringBuilder()).append("Zabuton ").append(ItemDye.dyeColorNames[15 - i]).toString()
 				);
 			ModLoader.addLocalization(
-					(new StringBuilder()).append(zabuton.getItemName()).append(".").append(ItemDye.dyeColorNames[15 - i]).append(".name").toString(),
+					(new StringBuilder()).append(zabuton.getUnlocalizedName()).append(".").append(ItemDye.dyeColorNames[15 - i]).append(".name").toString(),
 					"ja_JP",
 					(new StringBuilder()).append("À•z’c ").append(VZN_ItemZabuton.colorNamesJP[15 - i]).toString()
 				);
