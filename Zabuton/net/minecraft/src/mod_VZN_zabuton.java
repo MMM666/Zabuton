@@ -46,8 +46,8 @@ public class mod_VZN_zabuton extends BaseMod {
 	public static String texture_f = "";
 	@MLProp(info="true is enable alternativ recipe.")
 	public static boolean isAlternativeRecipe = false;
-	@MLProp(info="EntityID. 0 is auto assign.")
-	public static int uniqueEntityID = 222;
+	@MLProp
+	public static boolean isDebugMessage = true;
 	
 	public static Item zabuton;
 	public static String textureNames[] = {
@@ -60,9 +60,16 @@ public class mod_VZN_zabuton extends BaseMod {
 
 
 
+	public static void Debug(String pText, Object... pData) {
+		// デバッグメッセージ
+		if (isDebugMessage) {
+			System.out.println(String.format("Zabuton-" + pText, pData));
+		}
+	}
+
 	@Override
 	public String getVersion() {
-		return "1.5.0-1";
+		return "1.5.1-1";
 	}
 
 	@Override
@@ -77,11 +84,15 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public void load() {
+		int lentityid = MMM_Helper.getNextEntityID(false);
+		if (lentityid == -1) {
+			Debug("Break Zabuton.(can't registar EntityID.)");
+		}
+		
 		zabuton = new VZN_ItemZabuton(ItemID - 256).setUnlocalizedName("zabuton");
-		uniqueEntityID = uniqueEntityID == 0 ? MMM_Helper.getNextEntityID() : uniqueEntityID;
 		classZabuton = MMM_Helper.getForgeClass(this, "VZN_EntityZabuton");
-		ModLoader.registerEntityID(classZabuton, "Zabuton", uniqueEntityID);
-		ModLoader.addEntityTracker(this, classZabuton, uniqueEntityID, 80, 3, true);
+		ModLoader.registerEntityID(classZabuton, "Zabuton", lentityid);
+		ModLoader.addEntityTracker(this, classZabuton, lentityid, 80, 3, true);
 		
 		for (int i = 0; i < 16; i++) {
 			ModLoader.addLocalization(
