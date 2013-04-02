@@ -5,19 +5,19 @@ import java.util.List;
 
 public class VZN_EntityZabuton extends Entity implements IProjectile{
 
-	private double zabutonX;
-	private double zabutonY;
-	private double zabutonZ;
-	private double zabutonYaw;
-	private double zabutonPitch;
-	private double velocityX;
-	private double velocityY;
-	private double velocityZ;
-	private int health;
+	protected double zabutonX;
+	protected double zabutonY;
+	protected double zabutonZ;
+	protected double zabutonYaw;
+	protected double zabutonPitch;
+	protected double velocityX;
+	protected double velocityY;
+	protected double velocityZ;
+	protected int health;
 	public boolean isDispensed;
 	public byte color;
 
-	private int boatPosRotationIncrements;
+	protected int boatPosRotationIncrements;
 
 
 
@@ -43,13 +43,10 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 
 	public VZN_EntityZabuton(World world, double x, double y, double z, byte pColor) {
 		this(world, pColor);
-		setPosition(x, y + (double)yOffset, z);
+		setPositionAndRotation(x, y + (double)yOffset, z, 0F, 0F);
 		motionX = 0.0D;
 		motionY = 0.0D;
 		motionZ = 0.0D;
-		prevPosX = x;
-		prevPosY = y;
-		prevPosZ = z;
 	}
 
 	@Override
@@ -206,6 +203,13 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 
 	@Override
 	public void setPositionAndRotation2(double px, double py, double pz, float f, float f1, int i) {
+		this.setPosition(px, py, pz);
+		this.setRotation(f, f1);
+
+		//super.setPositionAndRotation2(px, py, pz, f, f1, i);
+		mod_VZN_zabuton.Debug("ID:%d - %f,  %f, %f", entityId, px, py, pz);
+		mod_VZN_zabuton.Debug("ID:%d - %f,  %f, %f", entityId, posX, posY, posZ);
+/*
 //        this.setPosition(px, py, pz);
 //        this.setRotation(f, f1);
 		this.boatPosRotationIncrements = i + 5;
@@ -220,6 +224,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 //        motionX = velocityX;
 //        motionY = velocityY;
 //        motionZ = velocityZ;
+*/
 	}
 
 	@Override
@@ -336,26 +341,22 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 			this.rotationYaw = (float)((double)this.rotationYaw + var14);
 			this.setRotation(this.rotationYaw, this.rotationPitch);
 			
-//			if (!this.worldObj.isRemote)
-			{
-				// ìñÇΩÇËîªíË
-				List var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.17D, 0.0D, 0.17D));
+			// ìñÇΩÇËîªíË
+			List var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.17D, 0.0D, 0.17D));
+			if (var16 != null && !var16.isEmpty()) {
+				Iterator var28 = var16.iterator();
 				
-				if (var16 != null && !var16.isEmpty()) {
-					Iterator var28 = var16.iterator();
+				while (var28.hasNext()) {
+					Entity var18 = (Entity)var28.next();
 					
-					while (var28.hasNext()) {
-						Entity var18 = (Entity)var28.next();
-						
-						if (var18 != this.riddenByEntity && var18.canBePushed() && var18 instanceof VZN_EntityZabuton) {
-							var18.applyEntityCollision(this);
-						}
+					if (var18 != this.riddenByEntity && var18.canBePushed() && var18 instanceof VZN_EntityZabuton) {
+						var18.applyEntityCollision(this);
 					}
 				}
 			}
 		}
 		if (this.riddenByEntity != null) {
-			if (this.riddenByEntity instanceof EntityLiving) { 
+			if (this.riddenByEntity instanceof EntityMob) { 
 				// ç¿Ç¡ÇƒÇÈä‘ÇÕè¡ñ≈Ç≥ÇπÇ»Ç¢
 				((EntityLiving)riddenByEntity).entityAge = 0;
 			}
