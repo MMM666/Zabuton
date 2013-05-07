@@ -207,8 +207,8 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 		this.setRotation(f, f1);
 
 		//super.setPositionAndRotation2(px, py, pz, f, f1, i);
-		mod_VZN_zabuton.Debug("ID:%d - %f,  %f, %f", entityId, px, py, pz);
-		mod_VZN_zabuton.Debug("ID:%d - %f,  %f, %f", entityId, posX, posY, posZ);
+//		mod_VZN_zabuton.Debug("ID:%d - %f,  %f, %f", entityId, px, py, pz);
+//		mod_VZN_zabuton.Debug("ID:%d - %f,  %f, %f", entityId, posX, posY, posZ);
 /*
 //        this.setPosition(px, py, pz);
 //        this.setRotation(f, f1);

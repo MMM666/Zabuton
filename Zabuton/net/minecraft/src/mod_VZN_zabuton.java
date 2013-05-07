@@ -69,7 +69,7 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.1-2";
+		return "1.5.2-1";
 	}
 
 	@Override
@@ -84,6 +84,9 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public void load() {
+		// MMMLibのRevisionチェック
+		MMM_Helper.checkRevision("1");
+		
 		int lentityid = MMM_Helper.getNextEntityID(false);
 		if (lentityid == -1) {
 			Debug("Break Zabuton.(can't registar EntityID.)");
