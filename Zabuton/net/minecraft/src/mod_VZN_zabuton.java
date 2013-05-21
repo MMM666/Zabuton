@@ -68,11 +68,6 @@ public class mod_VZN_zabuton extends BaseMod {
 	}
 
 	@Override
-	public String getVersion() {
-		return "1.5.2-1";
-	}
-
-	@Override
 	public String getName() {
 		return "Zabuton";
 	}
@@ -83,19 +78,25 @@ public class mod_VZN_zabuton extends BaseMod {
 	}
 
 	@Override
+	public String getVersion() {
+		return "1.5.2-2";
+	}
+
+	@Override
 	public void load() {
 		// MMMLibのRevisionチェック
-		MMM_Helper.checkRevision("1");
+		MMM_Helper.checkRevision("2");
 		
-		int lentityid = MMM_Helper.getNextEntityID(false);
-		if (lentityid == -1) {
-			Debug("Break Zabuton.(can't registar EntityID.)");
-		}
+//		int lentityid = MMM_Helper.getNextEntityID(false);
+//		if (lentityid == -1) {
+//			Debug("Break Zabuton.(can't registar EntityID.)");
+//		}
 		
 		zabuton = new VZN_ItemZabuton(ItemID - 256).setUnlocalizedName("zabuton");
 		classZabuton = MMM_Helper.getForgeClass(this, "VZN_EntityZabuton");
-		ModLoader.registerEntityID(classZabuton, "Zabuton", lentityid);
-		ModLoader.addEntityTracker(this, classZabuton, lentityid, 80, 3, true);
+		MMM_Helper.registerEntity(classZabuton, "Zabuton", 0, this, 80, 3, true);
+//		ModLoader.registerEntityID(classZabuton, "Zabuton", lentityid);
+//		ModLoader.addEntityTracker(this, classZabuton, lentityid, 80, 3, true);
 		
 		for (int i = 0; i < 16; i++) {
 			ModLoader.addLocalization(
@@ -145,7 +146,7 @@ public class mod_VZN_zabuton extends BaseMod {
 		// Renderを追加
 		map.put(VZN_EntityZabuton.class, new VZN_RenderZabuton());
 	}
-
+/*
 	@Override
 	public Entity spawnEntity(int entityId, World world, double scaledX, double scaledY, double scaledZ) {
 		// Forge
@@ -163,7 +164,7 @@ public class mod_VZN_zabuton extends BaseMod {
 		
 		return null;
 	}
-
+*/
 	@Override
 	public Packet23VehicleSpawn getSpawnPacket(Entity var1, int var2) {
 		//Modloader
