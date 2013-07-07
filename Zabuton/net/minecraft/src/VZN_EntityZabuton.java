@@ -132,11 +132,6 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 	}
 
 	@Override
-	public String getTexture() {
-		return mod_VZN_zabuton.textureNames[color];
-	}
-
-	@Override
 	public boolean handleWaterMovement() {
 		// 独自の水没判定
 		int var4 = MathHelper.floor_double(boundingBox.minX);
@@ -174,7 +169,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource damagesource, int i) {
+	public boolean attackEntityFrom(DamageSource damagesource, float pDammage) {
 		Entity entity = damagesource.getEntity();
 		if(worldObj.isRemote || isDead) {
 			return true;
@@ -184,7 +179,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 			entityDropItem(new ItemStack(mod_VZN_zabuton.zabuton, 1, color), 0.0F);
 			setDead();
 		} else {
-			health -= i;
+			health -= pDammage;
 			if(health <= 0) {
 				setDead();
 			}
@@ -390,7 +385,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 	}
 
 	@Override
-	public boolean interact(EntityPlayer entityplayer) {
+	public boolean func_130002_c(EntityPlayer entityplayer) {
 		// ラーイド・オン！
 		if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
 			return true;

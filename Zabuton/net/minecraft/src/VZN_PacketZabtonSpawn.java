@@ -1,6 +1,8 @@
 package net.minecraft.src;
 
+import java.io.DataInput;
 import java.io.DataInputStream;
+import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -21,23 +23,23 @@ public class VZN_PacketZabtonSpawn extends Packet23VehicleSpawn {
 	}
 
 	@Override
-	public void readPacketData(DataInputStream var1) throws IOException {
-		this.entityId = var1.readInt();
-		this.color = var1.readByte();
-		this.xPosition = var1.readInt();
-		this.yPosition = var1.readInt();
-		this.zPosition = var1.readInt();
-		this.rotationYaw = var1.readFloat();
+	public void readPacketData(DataInput par1DataInput) throws IOException {
+		this.entityId = par1DataInput.readInt();
+		this.color = par1DataInput.readByte();
+		this.xPosition = par1DataInput.readInt();
+		this.yPosition = par1DataInput.readInt();
+		this.zPosition = par1DataInput.readInt();
+		this.rotationYaw = par1DataInput.readFloat();
 	}
 
 	@Override
-	public void writePacketData(DataOutputStream var1) throws IOException {
-		var1.writeInt(this.entityId);
-		var1.writeByte(this.color);
-		var1.writeInt(this.xPosition);
-		var1.writeInt(this.yPosition);
-		var1.writeInt(this.zPosition);
-		var1.writeFloat(this.rotationYaw);
+	public void writePacketData(DataOutput par1DataOutput) throws IOException {
+		par1DataOutput.writeInt(this.entityId);
+		par1DataOutput.writeByte(this.color);
+		par1DataOutput.writeInt(this.xPosition);
+		par1DataOutput.writeInt(this.yPosition);
+		par1DataOutput.writeInt(this.zPosition);
+		par1DataOutput.writeFloat(this.rotationYaw);
 	}
 
 	@Override

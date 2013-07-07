@@ -7,13 +7,16 @@ import java.util.List;
 public class VZN_ItemZabuton extends Item {
 
 	public static final String colorNamesJP[] = {
-		"•", "Ô", "—Î", "’ƒ", "Â", "‡", "‹ó", "‹â",
-		"ŠD", "•q", "êS", "‰©", "’WÂ", "g‡", "ò", "”’" };
+		"•", "Ô", "—Î", "’ƒ",
+		"Â", "‡", "‹ó", "‹â",
+		"ŠD", "•q", "êS", "‰©",
+		"’WÂ", "g‡", "ò", "”’" };
 
-	public static final int colorValues[] = { 0x1e1b1b, 0xb3312c, 0x3b511a,
-			0x51301a, 0x253192, 0x7b2fbe, 0x287697, 0xa0a0af, 0x434343,
-			0xd88198, 0x41cd34, 0xdecf2a, 0x6689d3, 0xc354cd, 0xeb8844,
-			0xf0f0f0 };
+	public static final int colorValues[] = {
+		0x1e1b1b, 0xb3312c, 0x3b511a, 0x51301a,
+		0x253192, 0x7b2fbe, 0x287697, 0xa0a0af,
+		0x434343, 0xd88198, 0x41cd34, 0xdecf2a,
+		0x6689d3, 0xc354cd, 0xeb8844, 0xf0f0f0 };
 
 
 	public VZN_ItemZabuton(int i) {
