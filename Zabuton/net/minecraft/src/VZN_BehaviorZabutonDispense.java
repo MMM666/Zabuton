@@ -6,16 +6,12 @@ import net.minecraft.server.MinecraftServer;
 
 public class VZN_BehaviorZabutonDispense extends BehaviorProjectileDispense {
 
-	final MinecraftServer mcServer;
 	protected ItemStack fitemstack;
 
 
-	public VZN_BehaviorZabutonDispense(MinecraftServer par1MinecraftServer) {
-		this.mcServer = par1MinecraftServer;
-	}
-
 	@Override
 	public ItemStack dispenseStack(IBlockSource par1iBlockSource, ItemStack par2ItemStack) {
+		// F‚ğ¯•Ê‚·‚é‚½‚ß‚ÉItemStack‚ğŠm•Û
 		fitemstack = par2ItemStack;
 		return super.dispenseStack(par1iBlockSource, par2ItemStack);
 	}

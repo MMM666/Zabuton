@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.util.Iterator;
 import java.util.List;
 
-public class VZN_EntityZabuton extends Entity implements IProjectile{
+public class VZN_EntityZabuton extends Entity implements IProjectile {
 
 	protected double zabutonX;
 	protected double zabutonY;
@@ -68,7 +68,6 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 		float f3 = MathHelper.sqrt_double(px * px + pz * pz);
 		prevRotationYaw = rotationYaw = (float)((Math.atan2(px, pz) * 180D) / 3.1415927410125732D);
 		prevRotationPitch = rotationPitch = (float)((Math.atan2(py, f3) * 180D) / 3.1415927410125732D);
-//        ticksInGround = 0;
 		setDispensed(true);
 	}
 
@@ -112,19 +111,11 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 
 	@Override
 	public double getMountedYOffset() {
-		if (riddenByEntity instanceof EntityPlayer) {
-			return (double)height * 0.0D + 0.1D;
-		}
 		if (riddenByEntity instanceof EntitySpider) {
 			return (double)height * 0.0D - 0.1D;
 		}
-		if (riddenByEntity instanceof EntitySkeleton ||
-				riddenByEntity instanceof EntityZombie ||
+		if (	riddenByEntity instanceof EntityZombie ||
 				riddenByEntity instanceof EntityEnderman) {
-			return (double)height * 0.0D - 0.4D;
-		}
-		// ì¡éÍã@ëŒâû
-		if (riddenByEntity.getClass().getSimpleName().compareTo("Melo_e") == 0) {
 			return (double)height * 0.0D - 0.4D;
 		}
 		
@@ -273,13 +264,6 @@ public class VZN_EntityZabuton extends Entity implements IProjectile{
 				this.motionX *= 0.9900000095367432D;
 				this.motionY *= 0.949999988079071D;
 				this.motionZ *= 0.9900000095367432D;
-			}
-			
-			// TODO:ì¡éÍèàóù
-			if (this.riddenByEntity instanceof EntityLiving) {
-				EntityLiving lel = (EntityLiving)riddenByEntity;
-				// ç¿Ç¡ÇƒÇÈä‘ÇÕè¡ñ≈Ç≥ÇπÇ»Ç¢
-				lel.entityAge = 0;
 			}
 		} else {
 			// Server

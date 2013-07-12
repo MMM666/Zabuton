@@ -33,7 +33,7 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.6.1-1";
+		return "1.6.2-1";
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class mod_VZN_zabuton extends BaseMod {
 			});
 		}
 		
-		ModLoader.addDispenserBehavior(zabuton, new VZN_BehaviorZabutonDispense(null));
+		ModLoader.addDispenserBehavior(zabuton, new VZN_BehaviorZabutonDispense());
 	}
 
 	@Override

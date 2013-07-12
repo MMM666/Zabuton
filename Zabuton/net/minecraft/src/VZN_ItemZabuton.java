@@ -32,8 +32,7 @@ public class VZN_ItemZabuton extends Item {
 			EntityPlayer entityplayer) {
 		float f = 1.0F;
 		float f1 = entityplayer.prevRotationPitch
-				+ (entityplayer.rotationPitch - entityplayer.prevRotationPitch)
-				* f;
+				+ (entityplayer.rotationPitch - entityplayer.prevRotationPitch) * f;
 		float f2 = entityplayer.prevRotationYaw
 				+ (entityplayer.rotationYaw - entityplayer.prevRotationYaw) * f;
 		double d = entityplayer.prevPosX
@@ -54,8 +53,7 @@ public class VZN_ItemZabuton extends Item {
 		double d3 = 5D;
 		Vec3 vec3d1 = vec3d.addVector((double) f7 * d3, (double) f8 * d3,
 				(double) f9 * d3);
-		MovingObjectPosition movingobjectposition = world.rayTraceBlocks_do(
-				vec3d, vec3d1, true);
+		MovingObjectPosition movingobjectposition = world.clip(vec3d, vec3d1, true);
 		if (movingobjectposition == null) {
 			return itemstack;
 		}
@@ -77,14 +75,14 @@ public class VZN_ItemZabuton extends Item {
 								(float) i + 0.5F, (float) j + 1.0F,
 								(float) k + 0.5F,
 								(byte) (itemstack.getItemDamage() & 0x0f));
-
+						
 						// •ûŒü‚¬‚ß‚Í‚±‚±‚É“ü‚ê‚é
 						ez.rotationYaw = (MathHelper
 								.floor_double((double) ((entityplayer.rotationYaw * 4F) / 360F) + 2.50D) & 3) * 90;
 						world.spawnEntityInWorld(ez);
 					} catch (Exception e) {
 					}
-
+					
 				}
 				if (!entityplayer.capabilities.isCreativeMode) {
 					itemstack.stackSize--;
