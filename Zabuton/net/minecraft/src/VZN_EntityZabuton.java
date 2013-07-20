@@ -337,7 +337,7 @@ public class VZN_EntityZabuton extends Entity implements IProjectile {
 		if (this.riddenByEntity != null) {
 			if (this.riddenByEntity instanceof EntityMob) { 
 				// À‚Á‚Ä‚éŠÔ‚ÍÁ–Å‚³‚¹‚È‚¢
-				((EntityLiving)riddenByEntity).entityAge = 0;
+				((EntityLivingBase)riddenByEntity).entityAge = 0;
 			}
 			if (riddenByEntity.isDead) {
 				// ’…À‘ÎÛ‚ª€‚ñ‚¾‚ç–³l‰»

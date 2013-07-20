@@ -33,13 +33,13 @@ public class mod_VZN_zabuton extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.6.2-1";
+		return "1.6.2-2";
 	}
 
 	@Override
 	public void load() {
 		// MMMLibのRevisionチェック
-		MMM_Helper.checkRevision("1");
+		MMM_Helper.checkRevision("3");
 		
 		zabuton = new VZN_ItemZabuton(ItemID - 256).setUnlocalizedName("zabuton").func_111206_d("zabuton");
 		classZabuton = MMM_Helper.getForgeClass(this, "VZN_EntityZabuton");
